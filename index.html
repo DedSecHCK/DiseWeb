@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Butterfly IA-Developers — Plataforma completa</title>
+  <meta name="description" content="IA-Developers Butterfly: edición de código, formación, servicios de seguridad, Red/Blue/Butterfly Team, publicación y suscripciones VIP.">
+  <style>
+    :root{
+      --bg:#030417;--card:#071229;--accent:#ff66cc;--accent-2:#66ccff;--muted:#9fb0d1;--glass:rgba(255,255,255,0.04);--radius:14px
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:radial-gradient(circle at 18% 20%,#07112a 0%,#02030a 60%);color:#eaf2ff;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Poppins',sans-serif}
+    a{color:inherit}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;position:sticky;top:0;background:linear-gradient(180deg,rgba(3,4,23,0.72),rgba(3,4,23,0.4));backdrop-filter:blur(6px);z-index:140;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .left{display:flex;align-items:center;gap:12px}
+    .butterfly{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center}
+    .butterfly svg{width:36px;height:36px;filter:drop-shadow(0 6px 20px rgba(255,102,204,0.15));animation:float 5s ease-in-out infinite}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    .brand h1{margin:0;font-size:18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;color:transparent}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav{display:flex;gap:10px;align-items:center}
+    .nav-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px 12px;border-radius:12px;color:var(--muted);cursor:pointer;font-weight:700}
+    .nav-btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#051025;border:0}
+
+    .hero{padding:44px 20px;text-align:center}
+    .hero h2{font-size:30px;margin:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;color:transparent;animation:glow 4s infinite}
+    @keyframes glow{0%,100%{text-shadow:0 0 8px rgba(255,102,204,0.35)}50%{text-shadow:0 0 18px rgba(102,204,255,0.45)}}
+    .hero p{color:var(--muted);max-width:980px;margin:12px auto 0}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;max-width:1200px;margin:26px auto;padding:0 20px}
+    .card{background:var(--card);border-radius:12px;padding:16px;border:1px solid var(--glass);position:relative}
+    .card h3{margin:0 0 8px;color:var(--accent-2)}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .card .actions{margin-top:12px;display:flex;gap:8px}
+    .small{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent);cursor:pointer;color:var(--muted);font-weight:700}
+
+    .panels{max-width:1200px;margin:18px auto;padding:0 20px;display:grid;grid-template-columns:2fr 1fr;gap:18px}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);border-radius:12px;padding:16px;border:1px solid var(--glass)}
+    .panel h4{margin:0 0 8px}
+    .info{color:var(--muted);font-size:14px}
+
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,4,12,0.75);display:none;align-items:center;justify-content:center;z-index:220}
+    .modal{width:94%;max-width:980px;background:var(--card);border-radius:12px;padding:18px;border:1px solid var(--glass);box-shadow:0 30px 60px rgba(2,6,15,0.6)}
+    .modal h3{margin:0 0 8px;color:var(--accent)}
+    .modal .cols{display:grid;grid-template-columns:1fr 340px;gap:14px}
+    .list{background:rgba(255,255,255,0.02);padding:10px;border-radius:10px;max-height:360px;overflow:auto}
+    .list .item{padding:10px;border-bottom:1px solid rgba(255,255,255,0.02)}
+    .team-card{background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);padding:12px;border-radius:10px;margin-bottom:8px}
+
+    .form-container input,.form-container textarea{width:100%;margin:8px 0;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:#05102a;color:#fff}
+    .form-container .btn{width:100%;padding:10px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#051025;font-weight:700;cursor:pointer}
+
+    footer{padding:20px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,0.03);margin-top:24px}
+
+    /* watermark */
+    .watermark{position:fixed;right:14px;bottom:14px;opacity:0.06;z-index:10}
+
+    @media(max-width:880px){.panels{grid-template-columns:1fr}.modal .cols{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="left">
+      <div class="butterfly" aria-hidden>
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff66cc"/><stop offset="1" stop-color="#66ccff"/></linearGradient></defs><path d="M32 10c6 0 12 6 12 12s-6 12-12 12-12-6-12-12 6-12 12-12zM14 44c6-6 14-6 18 0 4-6 12-6 18 0 4 4 2 10-6 12-6 2-8-2-12-2s-6 4-12 2c-8-2-10-8-6-12z" fill="url(#g1)"/></svg>
+      </div>
+      <div class="brand"><h1>Butterfly IA-Developers</h1><p>Seguridad · Desarrollo · Formación</p></div>
+    </div>
+
+    <nav>
+      <button class="nav-btn" id="btnTools">Herramientas</button>
+      <button class="nav-btn" id="btnSecurity">Seguridad</button>
+      <button class="nav-btn" id="btnTeams">Equipos</button>
+      <button class="nav-btn primary" id="publicarBtn">Publicar</button>
+    </nav>
+  </header>
+
+  <section class="hero"><h2>Desarrolla. Crea. Protege con Butterfly.</h2><p>Plataforma para editores de código, formación en lenguajes base y servicios profesionales de seguridad. Equipos Red y Blue y el equipo Butterfly a cargo del desarrollo y deploy de herramientas de seguridad.</p></section>
+
+  <section class="grid">
+    <div class="card"><h3>Asistencia y Soporte</h3><p>Soporte técnico, despliegue de entornos y respuesta inmediata ante incidentes críticos.</p><div class="actions"><button class="small" id="openSupport">Abrir</button></div></div>
+    <div class="card"><h3>Protección de datos</h3><p>Cifrado, anonimización y cumplimiento de buenas prácticas. Servicios integrables en pipelines.</p><div class="actions"><button class="small" id="openData">Detalles</button></div></div>
+    <div class="card"><h3>Pentesting & Auditoría</h3><p>Evaluaciones, reportes y desarrollo de herramientas de pentesting para pruebas controladas.</p><div class="actions"><button class="small" id="openPentest">Ver</button></div></div>
+    <div class="card"><h3>Equipo Red Team</h3><p>Ofensiva ética. Simulaciones de intrusión y búsqueda de vectores de ataque.</p><div class="actions"><button class="small" data-team="red">Abrir equipo</button></div></div>
+    <div class="card"><h3>Equipo Blue Team</h3><p>Monitorización, detección y respuesta. Fortalecimiento de infraestructuras.</p><div class="actions"><button class="small" data-team="blue">Abrir equipo</button></div></div>
+    <div class="card"><h3>Butterfly Team</h3><p>Equipo encargado de la seguridad, desarrollo y despliegue de herramientas de protección. Coordinación Red/Blue y formación VIP.</p><div class="actions"><button class="small" data-team="butterfly">Conocer</button></div></div>
+  </section>
+
+  <div class="panels">
+    <div class="panel" id="mainPanel"><h4>Resumen</h4><p class="info">Selecciona un módulo para ver detalles. Usa los botones en el encabezado o en las tarjetas para abrir paneles con información ampliada, recursos de estudio, paquetes de lenguajes y opciones de suscripción VIP para formación avanzada en seguridad.</p>
+      <div style="margin-top:12px"><strong style="color:var(--accent)">Respuestas inmediatas</strong><p class="info">En caso de incidente, los miembros del Butterfly Team ofrecen diagnóstico inicial y guías de mitigación rápida.</p></div>
+    </div>
+    <div class="panel" id="quickActions"><h4>Acciones rápidas</h4><p class="info">Atajos para respuesta a incidentes, solicitar pentest o abrir un ticket de soporte.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+        <button class="small" id="reportIncident">Reportar incidente</button>
+        <button class="small" id="requestPentest">Solicitar pentest</button>
+        <button class="small" id="subscribeVIP">Suscripción VIP (Formación)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal used for multiple contexts -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modalContent">
+      <button id="closeModal" style="float:right;background:transparent;border:none;color:var(--muted);font-weight:800;cursor:pointer">X</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- watermark -->
+  <div class="watermark" aria-hidden><svg width="160" height="160" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="wb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff66cc"/><stop offset="1" stop-color="#66ccff"/></linearGradient></defs><path d="M32 10c6 0 12 6 12 12s-6 12-12 12-12-6-12-12 6-12 12-12zM14 44c6-6 14-6 18 0 4-6 12-6 18 0 4 4 2 10-6 12-6 2-8-2-12-2s-6 4-12 2c-8-2-10-8-6-12z" fill="url(#wb)"/></svg></div>
+
+  <footer>© 2025 Butterfly Security & IA-Developers · Plataforma profesional de desarrollo y seguridad.</footer>
+
+  <script>
+    const modalBackdrop=document.getElementById('modalBackdrop');
+    const modalBody=document.getElementById('modalBody');
+    const closeModal=document.getElementById('closeModal');
+    function openModal(html){modalBody.innerHTML=html;modalBackdrop.style.display='flex'}
+    function close(){modalBackdrop.style.display='none';modalBody.innerHTML=''}
+    closeModal.addEventListener('click',close);
+    modalBackdrop.addEventListener('click',e=>{if(e.target===modalBackdrop) close();});
+
+    /* Tools */
+    document.getElementById('btnTools').addEventListener('click',()=>{
+      openModal(`
+        <h3>Herramientas y Paquetes</h3>
+        <div class="cols">
+          <div>
+            <p class="info">Kits de inicio, IDEs, paquetes por lenguaje y herramientas de pentest. Acceso a materiales y laboratorios previos a suscripción.</p>
+            <div class="list" style="margin-top:10px">
+              <div class="item"><strong>IDE Butterfly</strong><div class="info">Editor ligero con integración IA para autocompletado y snippets.</div></div>
+              <div class="item"><strong>Paquete JS</strong><div class="info">Snippets, linters y plantillas.</div></div>
+              <div class="item"><strong>Paquete Python</strong><div class="info">Entornos virtuales y ejemplos.</div></div>
+              <div class="item"><strong>Kit Pentest</strong><div class="info">Herramientas de pruebas en sandbox para equipos de seguridad.</div></div>
+            </div>
+          </div>
+          <div>
+            <h4>Formación y Suscripción</h4>
+            <div class="subs">
+              <div class="plan"><strong>VIP Seguridad</strong><div class="info">Acceso a laboratorios avanzados, mentoría y certificación interna.</div></div>
+              <div class="plan"><strong>Estudiante</strong><div class="info">Acceso limitado a cursos y materiales. Requiere matrícula.</div></div>
+              <div class="pay"><input id="emailPay" placeholder="correo@ejemplo.com"><button id="payBtn">Pagar matrícula (simulado)</button></div>
+              <div style="margin-top:8px;color:var(--muted);font-size:13px">Pago simulado. Aquí se integraría la pasarela real.</div>
+            </div>
+          </div>
+        </div>
+      `);
+      document.getElementById('payBtn').addEventListener('click',()=>{const email=document.getElementById('emailPay').value||'usuario@correo';alert('Pago simulado aceptado para '+email+' . Acceso activado (simulación).');});
+    });
+
+    /* Security */
+    document.getElementById('btnSecurity').addEventListener('click',()=>{
+      openModal(`
+        <h3>Seguridad & Servicios</h3>
+        <p class="info">Consultoría, pentesting, auditorías y deploy de contramedidas. Respuesta inmediata y SLAs profesionales para clientes VIP.</p>
+        <div style="margin-top:12px"><strong>Servicios clave</strong><ul class="info"><li>Evaluaciones de vulnerabilidad</li><li>Desarrollo de herramientas defensivas</li><li>Integración CI/CD seguro</li><li>Respuesta a incidentes</li></ul></div>
+      `);
+    });
+
+    /* Teams: Red, Blue, Butterfly - modal with list and read detail */
+    const teamsContent = {
+      red:{title:'Red Team — Ofensiva Ética',desc:'Pruebas de intrusión controladas, explotación, ingeniería social y creación de herramientas de prueba. Entrega de reportes con remediaciones.',cards:[{title:'Phishing controlado',text:'Campañas de phishing simuladas para medir resiliencia humana.'},{title:'Explotación',text:'Pruebas técnicas sobre infraestructuras y servicios expuestos.'},{title:'Persistencia',text:'Evaluación de mecanismos de persistencia y explotación de privilegios.'}]},
+      blue:{title:'Blue Team — Defensa y Respuesta',desc:'Monitoreo, detección y respuesta. Implementación de detección, playbooks y endurecimiento de infraestructuras.',cards:[{title:'SIEM & Detección',text:'Integración de registros y reglas de detección.'},{title:'Playbooks',text:'Procedimientos de respuesta y escalado ante incidentes.'},{title:'Forense',text:'Análisis post-incidente y preservación de evidencia.'}]},
+      butterfly:{title:'Butterfly Team — Desarrollo y Despliegue',desc:'Equipo central que desarrolla herramientas, gestiona deploys y coordina Red/Blue. Formación VIP y mantenimiento de kits de pentest.',cards:[{title:'CI/CD seguro',text:'Pipelines seguros con análisis estático y dinámico.'},{title:'Kits pentest',text:'Mantenimiento y despliegue de herramientas internas para pruebas.'},{title:'Capacitación',text:'Cursos y mentoría para miembros VIP.'}]}
+    };
+
+    function openTeamsModal(selected){
+      let leftList = '';
+      const keys = ['red','blue','butterfly'];
+      keys.forEach(k=>{
+        leftList += `<div class="team-card"><strong>${teamsContent[k].title}</strong><div class="info" style="margin-top:6px">${teamsContent[k].desc}</div><div style="margin-top:8px"><button class='small readTeam' data-team='${k}'>Leer detalles</button></div></div>`;
+      });
+      const rightHtml = `<div id='teamDetail'><h3>${teamsContent[selected].title}</h3><p class='info'>${teamsContent[selected].desc}</p><div style='margin-top:10px'>` + teamsContent[selected].cards.map(c=>`<div style='margin-bottom:8px'><strong>${c.title}</strong><div class='info'>${c.text}</div></div>`).join('') + `</div></div>`;
+      openModal(`<h3>Equipos de Seguridad</h3><div class='cols'><div>${leftList}</div><div>${rightHtml}</div></div>`);
+    }
+
+    document.getElementById('btnTeams').addEventListener('click',()=>openTeamsModal('butterfly'));
+    document.querySelectorAll('[data-team]').forEach(btn=>btn.addEventListener('click',e=>openTeamsModal(e.currentTarget.getAttribute('data-team'))));
+
+    /* Delegation: readTeam buttons inside modal */
+    document.addEventListener('click',e=>{
+      if(e.target && e.target.classList.contains('readTeam')){
+        const team=e.target.getAttribute('data-team');
+        const detailHtml = `<h3>${teamsContent[team].title}</h3><p class='info'>${teamsContent[team].desc}</p><div style='margin-top:10px'>` + teamsContent[team].cards.map(c=>`<div style='margin-bottom:10px;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02)'><strong>${c.title}</strong><div class='info'>${c.text}</div></div>`).join('') + `</div>`;
+        const teamDetail = modalBody.querySelector('#teamDetail');
+        if(teamDetail) teamDetail.innerHTML = detailHtml; else modalBody.innerHTML = `<div class='cols'><div></div><div>${detailHtml}</div></div>`;
+      }
+    });
+
+    /* Other quick actions and cards */
+    document.getElementById('openSupport').addEventListener('click',()=>openModal(`<h3>Asistencia Técnica</h3><p class='info'>Abra un ticket y reciba diagnóstico inicial. El equipo Butterfly prioriza según impacto.</p><div style='margin-top:10px'><button class='nav-btn small' id='openTicket'>Abrir ticket</button></div>`));
+    document.getElementById('openData').addEventListener('click',()=>openModal(`<h3>Protección de Datos</h3><p class='info'>Estrategias de cifrado, gestión de secretos y cumplimiento normativo. Integraciones con almacenamiento cifrado.</p>`));
+    document.getElementById('openPentest').addEventListener('click',()=>openModal(`<h3>Pentesting</h3><p class='info'>Paquetes de pruebas, entornos aislados y entrega de reportes. Desarrollo de herramientas propias para análisis automático.</p>`));
+
+    document.getElementById('reportIncident').addEventListener('click',()=>openModal(`<h3>Reportar Incidente</h3><p class='info'>Describa el incidente. Un miembro del Butterfly Team contactará para diagnóstico inicial.</p><textarea style='width:100%;height:120px;border-radius:8px;background:#03102a;color:#fff;border:1px solid rgba(255,255,255,0.04)'></textarea><div style='margin-top:10px'><button class='small' id='sendReport'>Enviar reporte</button></div>`));
+    document.getElementById('requestPentest').addEventListener('click',()=>openModal(`<h3>Solicitar Pentest</h3><p class='info'>Complete los datos del alcance. El equipo le enviará presupuesto y plan de trabajo.</p><input placeholder='Alcance (IP, dominios, servicios)' style='width:100%;padding:8px;border-radius:8px;background:#03102a;color:#fff;border:1px solid rgba(255,255,255,0.04)'><div style='margin-top:10px'><button class='small' id='sendPentest'>Enviar solicitud</button></div>`));
+
+    document.getElementById('subscribeVIP').addEventListener('click',()=>{
+      openModal(`<h3>Suscripción VIP</h3><div class='subs'><div class='plan'><strong>VIP Seguridad</strong><div class='info'>Acceso a laboratorios, mentoría y despliegue de herramientas. Incluye material exclusivo y soporte prioritario.</div></div><div style='margin-top:10px' class='pay'><input id='vipEmail' placeholder='correo@ejemplo.com'><button id='vipPay' class='small'>Pagar (simulado)</button></div></div>`);
+      document.getElementById('vipPay').addEventListener('click',()=>{ alert('Matrícula VIP simulada. Correo: '+(document.getElementById('vipEmail').value||'usuario@correo')); close(); });
+    });
+
+    /* Publish form */
+    document.getElementById('publicarBtn').addEventListener('click',()=>{
+      openModal(`<h3>Publicar Oferta o Proyecto</h3><div class='form-container'><input placeholder='Título'><textarea placeholder='Descripción' style='height:120px'></textarea><input placeholder='Tecnologías (ej. JS, Python)'><button class='btn' id='submitPublish'>Publicar</button></div>`);
+      document.getElementById('submitPublish').addEventListener('click',()=>{alert('Publicación simulada. Se agregó a la cola de revisión.');close();});
+    });
+
+    /* Delegated handlers inside modal */
+    document.addEventListener('click',e=>{
+      if(!e.target) return;
+      if(e.target.id==='openTicket'){alert('Ticket creado. Un agente se contactará. (simulado)');close();}
+      if(e.target.id==='sendReport'){alert('Reporte enviado. Prioridad asignada. (simulado)');close();}
+      if(e.target.id==='sendPentest'){alert('Solicitud de pentest enviada. Revisaremos el alcance. (simulado)');close();}
+    });
+
+    /* Make butterfly visible as watermark on pages */
+    // watermark already in DOM
+  </script>
+</body>
+</html>
